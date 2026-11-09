@@ -21,19 +21,19 @@
             // On vérifie que les champs ne soient pas vides
             if($pseudo === '' || $score === '' || $teamId === '') {
                 $this->view->setMessage('Veuillez remplir tous les champs !');
-                return;
+                return $this;
             }
 
             // On vérifie les types de valeurs
             if(!is_numeric($score) || !is_numeric($teamId)) {
                 $this->view->setMessage('Les informations sont invalides !');
-                return;
+                return $this;
             }
 
             $checkPseudo = $this->model->findByPseudo($pseudo);
             if(!empty($checkPseudo)) {
                 $this->view->setMessage('Ce Pseudo est déjà utilisé !');
-                return;
+                return $this;
             }   
 
             $this->model->add($pseudo , $score , $teamId);
